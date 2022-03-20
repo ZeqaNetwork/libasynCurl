@@ -31,9 +31,12 @@ class Curl {
 		$plugin->getScheduler()->scheduleRepeatingTask(new ClosureTask(function () : void {
 			self::$threadPool->collectTasks();
 		}), $collect_interval);
-		$plugin->getScheduler()->scheduleRepeatingTask(new ClosureTask(function () : void {
-			self::$threadPool->triggerGarbageCollector();
-		}), $garbage_collect_interval);
+
+		if($garbage_collect_interval > 0) {
+			$plugin->getScheduler()->scheduleRepeatingTask(new ClosureTask(function () : void {
+				self::$threadPool->triggerGarbageCollector();
+			}), $garbage_collect_interval);
+		}
 
 		self::$registered = true;
 	}
