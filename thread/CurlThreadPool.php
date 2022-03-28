@@ -11,26 +11,27 @@ use pocketmine\scheduler\DumpWorkerMemoryTask;
 use pocketmine\scheduler\GarbageCollectionTask;
 use function gc_collect_cycles;
 
-class CurlThreadPool extends AsyncPool {
+class CurlThreadPool extends AsyncPool{
 
 	/**
 	 * Dumps the server memory into the specified output folder.
 	 *
 	 * @param string $outputFolder
-	 * @param int $maxNesting
-	 * @param int $maxStringSize
+	 * @param int    $maxNesting
+	 * @param int    $maxStringSize
+	 *
 	 * @return void
 	 */
-	public function dumpMemory(string $outputFolder, int $maxNesting, int $maxStringSize) : void {
-		foreach ($this->getRunningWorkers() as $i) {
+	public function dumpMemory(string $outputFolder, int $maxNesting, int $maxStringSize) : void{
+		foreach($this->getRunningWorkers() as $i){
 			$this->submitTaskToWorker(new DumpWorkerMemoryTask($outputFolder, $maxNesting, $maxStringSize), $i);
 		}
 	}
 
-	public function triggerGarbageCollector() : int {
+	public function triggerGarbageCollector() : int{
 		$this->shutdownUnusedWorkers();
 
-		foreach ($this->getRunningWorkers() as $i) {
+		foreach($this->getRunningWorkers() as $i){
 			$this->submitTaskToWorker(new GarbageCollectionTask(), $i);
 		}
 
