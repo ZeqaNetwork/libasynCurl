@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 
-namespace libasynCurl;
+namespace nethergamesmc\libasyncurl;
 
 
 use Closure;
 use InvalidArgumentException;
-use libasynCurl\thread\CurlDeleteTask;
-use libasynCurl\thread\CurlGetTask;
-use libasynCurl\thread\CurlPostTask;
-use libasynCurl\thread\CurlThreadPool;
+use nethergamesmc\libasyncurl\thread\CurlDeleteTask;
+use nethergamesmc\libasyncurl\thread\CurlGetTask;
+use nethergamesmc\libasyncurl\thread\CurlPostTask;
+use nethergamesmc\libasyncurl\thread\CurlThreadPool;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\ClosureTask;
 
